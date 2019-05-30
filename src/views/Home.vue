@@ -14,6 +14,13 @@
       <el-button type="primary" @click="onJump">回到底部</el-button>
       <el-button type="success" @click="onJump">回到顶部</el-button>
     </div>-->
+    <div class="block">
+      <el-carousel trigger="click" arrow="always">
+        <el-carousel-item v-for="item in imgs" :key="item">
+          <img :src="item">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
     <div id="amapDemo1"></div>
     <div id="amapDemo2"></div>
     <div class="m-part">
@@ -96,6 +103,7 @@ export default {
   data() {
     return {
       msg: '高德地图展示',
+      imgs: [require('../../static/IMG_20181001_103524735.jpg'), require('../../static/IMG_20181001_110127177.jpg'), require('../../static/IMG_20181001_110158570.jpg')],
       mapData: {
         lng: null,
         lat: null,
@@ -583,5 +591,21 @@ export default {
     background: #ffffff;
     border: 1px solid #ebeef5;
     text-align: left;
+  }
+  .block {
+    margin-left: 20%;
+    width: 220px;
+  }
+
+  .el-carousel__item image {
+    width: 100%;
+    height: 100%;
+  }
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n + 1) {
+    background-color: #d3dce6;
   }
 </style>

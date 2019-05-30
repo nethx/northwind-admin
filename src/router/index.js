@@ -201,6 +201,24 @@ const routerMap = [
         }
       }
     ]
+  },
+  {
+    path: 'form',
+    component: Layout,
+    redirect: '/form',
+    name: 'form',
+    children: [
+      {
+        path: '/form',
+        component: resolve => require(['views/Form'], resolve),
+        name: 'formHome',
+        meta: {
+          title: '表单',
+          icon: 'form',
+          noCache: true
+        }
+      }
+    ]
   }
 ]
 const router = new Router({

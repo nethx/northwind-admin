@@ -21,10 +21,11 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-
-              <el-form-item label="产品名称" prop="ProductName">
-                <el-input v-model.trim="product.ProductName" placeholder="请输入产品名称"></el-input>
-              </el-form-item>
+              <el-col :span="17">
+                <el-form-item label="产品名称" prop="ProductName">
+                  <el-input v-model.trim="product.ProductName" placeholder="请输入产品名称"></el-input>
+                </el-form-item>
+              </el-col>
 
               <div class="postInfo-container">
                 <el-row>
@@ -161,7 +162,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid, fields) => {
         if (valid) {
           this.loading = true
           api.putProduct(this.product).then(response => {

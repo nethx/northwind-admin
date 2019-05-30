@@ -1,0 +1,192 @@
+[
+  {
+    "groupTitle": "合同信息",
+    "labelWidth": "80px",
+    "formType": "single",
+    "formItemList": [
+      {
+        "label": "批次：",
+        "key": "batchNo",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入批次",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "batchNo",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "label": "合同号：",
+        "domain": "customer",
+        "key": "contractNumber",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入合同号",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "contractNumber",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "label": "签订日期：",
+        "key": "contractSignDate",
+        "rules": [
+          {
+            "required": true,
+            "message": "请您选择签订日期",
+            "trigger": "change"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "date",
+            "subtype": "date",
+            "disabled": false,
+            "key": "contractSignDate",
+            "placeholder": "请选择",
+            "valueFormat": "yyyy-MM-dd"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "groupTitle": "房产信息",
+    "labelWidth": "130px",
+    "domain": "houses",
+    "formItemList": [
+      {
+        "label": "房产名称：",
+        "key": "communityName",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入房产名称",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "communityName",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "label": "产权人姓名：",
+        "key": "obligeeName",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入产权人姓名",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "obligeeName",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "label": "产权人身份证：",
+        "key": "obligeeIdNo",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入产权人身份证",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "obligeeIdNo",
+            "disabled": false
+          }
+        ]
+      }
+    ],
+    "formItemList1": [
+      {
+        "label": "产权人姓名：",
+        "key": "name",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入产权人姓名",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "name",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "label": "产权人身份证：",
+        "key": "idNo",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入产权人身份证",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "idNo",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "label": "产权人手机号码：",
+        "key": "mobile",
+        "rules": [
+          {
+            "required": true,
+            "message": "请输入产权人手机号码",
+            "trigger": "blur"
+          }
+        ],
+        "inputs": [
+          {
+            "type": "input",
+            "subtype": "text",
+            "key": "mobile",
+            "disabled": false
+          }
+        ]
+      }
+    ]
+  }
+]
