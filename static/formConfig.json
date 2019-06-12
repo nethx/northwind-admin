@@ -68,7 +68,7 @@
   },
   {
     "groupTitle": "房产信息",
-    "labelWidth": "130px",
+    "labelWidth": "110px",
     "domain": "houses",
     "formItemList": [
       {

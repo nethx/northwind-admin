@@ -213,7 +213,7 @@ const routerMap = [
         component: resolve => require(['views/Form'], resolve),
         name: 'formHome',
         meta: {
-          title: '表单',
+          title: '动态表单',
           icon: 'form',
           noCache: true
         }

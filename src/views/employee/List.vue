@@ -122,23 +122,22 @@ export default {
       this.listQuery.page = val
       this.fetchData()
     },
-    fetchData() {
+    async fetchData() {
       this.listLoading = true
-      api.getEmployeeList(this.listQuery.page, this.listQuery.limit).then(response => {
-        this.listLoading = false
-        if (response.retCode == 200) {
-          this.list = response.retData
-          if (response.dataCount > 0) {
-            this.listQuery.total = response.dataCount
-          }
-          scrollTo(0, 800)
-        } else {
-          this.$message({
-            message: response.message,
-            type: 'error'
-          })
+      const response = await api.getEmployeeList(this.listQuery.page, this.listQuery.limit)
+      this.listLoading = false
+      if (response.retCode == 200) {
+        this.list = response.retData
+        if (response.dataCount > 0) {
+          this.listQuery.total = response.dataCount
         }
-      })
+        scrollTo(0, 800)
+      } else {
+        this.$message({
+          message: response.message,
+          type: 'error'
+        })
+      }
     }
   }
 }
