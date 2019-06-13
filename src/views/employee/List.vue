@@ -41,18 +41,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-show="this.listQuery.total>0"
-      background
-      class="tableArea"
-      style="margin: 10px 0 0 0"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="listQuery.page"
-      :page-size="listQuery.limit"
-      layout="prev, pager, next, jumper"
-      :total="listQuery.total"
-    ></el-pagination>
+    <el-pagination v-show="this.listQuery.total>0" background class="tableArea" style="margin: 10px 0 0 0" @size-change="handleSizeChange" @current-change="handleSizeChange" :current-page.sync="listQuery.page" :page-size="listQuery.limit" layout="prev, pager, next, jumper" :total="listQuery.total"></el-pagination>
   </div>
 </template>
 
@@ -118,10 +107,7 @@ export default {
       this.listQuery.page = val
       this.fetchData()
     },
-    handleCurrentChange(val) {
-      this.listQuery.page = val
-      this.fetchData()
-    },
+
     async fetchData() {
       this.listLoading = true
       const response = await api.getEmployeeList(this.listQuery.page, this.listQuery.limit)
