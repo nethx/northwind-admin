@@ -1,74 +1,74 @@
 // import qs from 'qs'
-import service from "./request";
-import md5 from "js-md5";
-import { parseTime } from "utils";
+import service from './request'
+import md5 from 'js-md5'
+import { parseTime } from 'utils'
 
 export default {
   /**
    * 登录
    */
   login(LoginName, password) {
-    let url = "user/Login";
-    const loginSalt = "FJKliJNVjkfdskrwoNKVNDKjfodiFJDKljioJFKDL"; //登录签名
-    const valid = parseTime(new Date(), "{y}{m}{d}{h}{i}{s}");
+    let url = 'user/Login'
+    const loginSalt = 'FJKliJNVjkfdskrwoNKVNDKjfodiFJDKljioJFKDL' //登录签名
+    const valid = parseTime(new Date(), '{y}{m}{d}{h}{i}{s}')
     let UserLogin = {
       LoginName: LoginName,
       Password: password,
-      Mac: "",
+      Mac: '',
       Valid: valid,
       Sign: md5(LoginName + password + valid + loginSalt)
-    };
-    return service.post(url, UserLogin);
+    }
+    return service.post(url, UserLogin)
   },
   getEmployeeList(pageIndex, pageSize) {
-    let url = "Employee/GetList/" + pageIndex + "_" + pageSize;
-    return service.get(url);
+    let url = 'Employee/GetList/' + pageIndex + '_' + pageSize
+    return service.get(url)
   },
   getEmployeeById(employeeId) {
-    let url = "Employee/GetById/" + employeeId;
-    return service.get(url);
+    let url = 'Employee/GetById/' + employeeId
+    return service.get(url)
   },
   putEmployee(employee) {
-    let url = "Employee/post";
-    return service.post(url, employee);
+    let url = 'Employee/post'
+    return service.post(url, employee)
   },
   deleteEmployeeById(employeeId) {
-    let url = "Employee/Delete?id=" + employeeId;
-    return service.delete(url);
+    let url = 'Employee/Delete?id=' + employeeId
+    return service.delete(url)
   },
   getCustomerList(companyName, contactName, phone, pageIndex, pageSize) {
     let url =
-      "Customer/GetList?companyName=" +
+      'Customer/GetList?companyName=' +
       companyName +
-      "&contactName=" +
+      '&contactName=' +
       contactName +
-      "&phone=" +
+      '&phone=' +
       phone +
-      "&pageIndex=" +
+      '&pageIndex=' +
       +pageIndex +
-      "&pageSize=" +
-      pageSize;
-    return service.get(url);
+      '&pageSize=' +
+      pageSize
+    return service.get(url)
   },
   getCustomerById(customerId) {
-    let url = "Customer/GetById/" + customerId;
-    return service.get(url);
+    let url = 'Customer/GetById/' + customerId
+    return service.get(url)
   },
   putCustomer(Customer) {
-    let url = "Customer/post";
-    return service.post(url, Customer);
+    let url = 'Customer/post'
+    return service.post(url, Customer)
   },
   deleteCustomerById(customerId) {
-    let url = "Customer/Delete?id=" + customerId;
-    return service.delete(url);
+    let url = 'Customer/Delete?id=' + customerId
+    return service.delete(url)
   },
   getCategoryDrop() {
-    let url = "Category/GetDropList";
-    return service.get(url);
+    let url = 'Category/GetDropList'
+    return service.get(url)
   },
   getSupplierDrop() {
-    let url = "Supplier/GetDropList";
-    return service.get(url);
+    let url = 'Supplier/GetDropList'
+    return service.get(url)
   },
   getProductList(
     productName,
@@ -79,31 +79,31 @@ export default {
     pageSize
   ) {
     let url =
-      "Product/GetList?productName=" +
+      'Product/GetList?productName=' +
       productName +
-      "&supplierID=" +
+      '&supplierID=' +
       supplierID +
-      "&categoryID=" +
+      '&categoryID=' +
       categoryID +
-      "&discontinued=" +
+      '&discontinued=' +
       discontinued +
-      "&pageIndex=" +
+      '&pageIndex=' +
       +pageIndex +
-      "&pageSize=" +
-      pageSize;
-    return service.get(url);
+      '&pageSize=' +
+      pageSize
+    return service.get(url)
   },
   getProductById(ProductId) {
-    let url = "Product/GetById/" + ProductId;
-    return service.get(url);
+    let url = 'Product/GetById/' + ProductId
+    return service.get(url)
   },
   putProduct(product) {
-    let url = "Product/post";
-    return service.post(url, product);
+    let url = 'Product/post'
+    return service.post(url, product)
   },
   deleteProductById(productId) {
-    let url = "Product/Delete?id=" + productId;
-    return service.delete(url);
+    let url = 'Product/Delete?id=' + productId
+    return service.delete(url)
   },
   getOrderList(
     customerName,
@@ -115,29 +115,30 @@ export default {
     pageSize
   ) {
     let url =
-      "Order/GetList?customerName=" +
+      'Order/GetList?customerName=' +
       customerName +
-      "&shipName=" +
+      '&shipName=' +
       shipName +
-      "&shipperID=" +
+      '&shipperID=' +
       shipperID +
-      "&orderStartDate=" +
+      '&orderStartDate=' +
       orderStartDate +
-      "&orderEndDate=" +
+      '&orderEndDate=' +
       orderEndDate +
-      "&pageIndex=" +
+      '&pageIndex=' +
       pageIndex +
-      "&pageSize=" +
-      pageSize;
-    return service.get(url);
+      '&pageSize=' +
+      pageSize
+    return service.get(url)
   },
   /**
    * 上传文件
    */
-  async fileUpload(image) {
-    const url = "Employee/UploadAvatar";
-    let formData = new FormData();
-    formData.append("file", image);
-    return await service.post(url, formData);
+  async fileUpload(file, fileName) {
+    const url = 'Employee/UploadAvatar'
+    let formData = new FormData()
+    formData.append('file', file)
+    formData.append('filename', fileName)
+    return await service.post(url, formData)
   }
-};
+}

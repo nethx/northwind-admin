@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input placeholder="姓名" v-model.trim="listQuery.name" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-input placeholder="姓名" v-model.trim="listQuery.name" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
     </div>
     <el-table v-loading="listLoading" :data="list" border class="tableArea" max-height="672" stripe style="border-left: 1px solid #ebeef5;border-right: 1px solid #ebeef5;">
@@ -33,10 +33,10 @@
         </template>-->
         <template slot-scope="scope">
           <el-tooltip class="item" effect="dark" content="修改" placement="top-start">
-            <i class="el-icon-edit-outline" @click="handleUpdate(scope.row)"/>
+            <i class="el-icon-edit-outline" @click="handleUpdate(scope.row)" />
           </el-tooltip>
           <el-tooltip class="item" effect="dark" content="删除" placement="top-start">
-            <i class="el-icon-delete" @click="handleModifyStatus(scope.row,scope.$index)"/>
+            <i class="el-icon-delete" @click="handleModifyStatus(scope.row,scope.$index)" />
           </el-tooltip>
         </template>
       </el-table-column>
