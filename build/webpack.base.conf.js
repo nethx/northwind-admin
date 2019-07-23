@@ -8,34 +8,41 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    // app: './src/main.js'
+    app: [
+      'eventsource-polyfill',
+      'event-source-polyfill',
+      'babel-polyfill',
+      './src/main.js'
+    ]
   },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production' ?
-      config.build.assetsPublicPath : config.dev.assetsPublicPath
+    publicPath:
+      process.env.NODE_ENV === 'production'
+        ? config.build.assetsPublicPath
+        : config.dev.assetsPublicPath
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'styles': path.resolve(__dirname, '../src/styles'),
-      'icons': path.resolve(__dirname, '../src/icons'),
-      'components': path.resolve(__dirname, '../src/components'),
-      'views': path.resolve(__dirname, '../src/views'),
-      'utils': path.resolve(__dirname, '../src/utils'),
-      'apis': path.resolve(__dirname, '../src/api/index.js')
+      styles: path.resolve(__dirname, '../src/styles'),
+      icons: path.resolve(__dirname, '../src/icons'),
+      components: path.resolve(__dirname, '../src/components'),
+      views: path.resolve(__dirname, '../src/views'),
+      utils: path.resolve(__dirname, '../src/utils'),
+      apis: path.resolve(__dirname, '../src/api/index.js')
     }
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
@@ -43,7 +50,15 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [
+          resolve('src'),
+          resolve('test'),
+          resolve('node_modules/webpack-dev-server/client'),
+          resolve('./node_modules/element-ui/src'),
+          resolve('./node_modules/element-ui/packages'),
+          resolve('./node_modules/_element-ui@2.4.11@element-ui/src'),
+          resolve('./node_modules/_element-ui@2.4.11@element-ui/packages')
+        ]
       },
       {
         test: /\.svg$/,

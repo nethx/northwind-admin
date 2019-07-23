@@ -10,7 +10,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "element-ui": "^2.4.11",
+    "event-source-polyfill": "^1.0.7",
+    "eventsource-polyfill": "^0.9.6",
     "file-saver": "^2.0.0",
     "js-md5": "^0.7.3",
     "nanobar": "^0.4.2",
