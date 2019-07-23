@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input placeholder="姓名" v-model.trim="listQuery.name" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-input placeholder="姓名" v-model.trim="listQuery.name" size="small" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-button class="filter-item" size="small" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
     </div>
     <el-table v-loading="listLoading" :data="list" border class="tableArea" max-height="672" stripe style="border-left: 1px solid #ebeef5;border-right: 1px solid #ebeef5;">
       <el-table-column prop="EmployeeID" label="编号" align="center" width="50" fixed></el-table-column>
@@ -26,22 +26,33 @@
       <el-table-column prop="City" label="所属城市" width="100px"></el-table-column>
       <el-table-column prop="HomePhone" label="联系电话" width="120px"></el-table-column>
       <el-table-column prop="Notes" label="备注" min-width="100px"></el-table-column>
-      <el-table-column label="操作" align="center" width="145px" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="77px" fixed="right" class-name="small-padding fixed-width">
         <!-- <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleModifyStatus(scope.row,scope.$index)">删除</el-button>
         </template>-->
         <template slot-scope="scope">
-          <el-tooltip class="item" effect="dark" content="修改" placement="top-start">
+          <!-- <el-tooltip class="item" effect="dark" content="修改" placement="top-start">
             <i class="el-icon-edit-outline" @click="handleUpdate(scope.row)" />
           </el-tooltip>
           <el-tooltip class="item" effect="dark" content="删除" placement="top-start">
             <i class="el-icon-delete" @click="handleModifyStatus(scope.row,scope.$index)" />
-          </el-tooltip>
+          </el-tooltip>-->
+          <el-button size="small" type="text" @click="handleUpdate(scope.row)">修改</el-button>
+          <el-button size="small" type="text" @click="handleModifyStatus(scope.row,scope.$index)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination v-show="this.listQuery.total>0" background class="tableArea" style="margin: 10px 0 0 0" @size-change="handleSizeChange" @current-change="handleSizeChange" :current-page.sync="listQuery.page" :page-size="listQuery.limit" layout="prev, pager, next, jumper" :total="listQuery.total"></el-pagination>
+    <div v-show="!listLoading" class="pagination-container">
+      <el-row>
+        <el-col :span="7">
+          <el-button type="primary" plain size="small" icon="edit">添加</el-button>
+        </el-col>
+        <el-col :span="17">
+          <el-pagination v-show="this.listQuery.total>0" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-size.sync="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="listQuery.total"></el-pagination>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -54,7 +65,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 15,
+        limit: 10,
         total: 0,
         name: null
       },
@@ -104,6 +115,10 @@ export default {
       this.fetchData()
     },
     handleSizeChange(val) {
+      this.listQuery.limit = val
+      this.fetchData()
+    },
+    handleCurrentChange(val) {
       this.listQuery.page = val
       this.fetchData()
     },
@@ -131,6 +146,6 @@ export default {
 <style scoped>
   .tableArea {
     box-shadow: 0 0 8px 0 #aaa;
-    width: 99%;
+    width: 100%;
   }
 </style>

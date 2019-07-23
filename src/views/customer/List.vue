@@ -1,9 +1,10 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input placeholder="企业名称" v-model.trim="listQuery.companyName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-input placeholder="联系人" v-model.trim="listQuery.contactName" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-input placeholder="电话" v-model.trim="listQuery.phone" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      npm r
+      <el-input placeholder="企业名称" v-model.trim="listQuery.companyName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input placeholder="联系人" v-model.trim="listQuery.contactName" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input placeholder="电话" v-model.trim="listQuery.phone" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
     </div>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
@@ -13,14 +14,25 @@
       <el-table-column prop="ContactName" label="联系人" width="120"></el-table-column>
       <el-table-column prop="Phone" label="联系电话" width="120"></el-table-column>
       <el-table-column prop="Address" label="详细地址" min-width="100px"></el-table-column>
-      <el-table-column label="操作" align="center" width="145px" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="77px" fixed="right" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleModifyStatus(scope.row,scope.$index)">删除</el-button>
+          <!-- <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleModifyStatus(scope.row,scope.$index)">删除</el-button>-->
+          <el-button size="small" type="text" @click="handleUpdate(scope.row)">修改</el-button>
+          <el-button size="small" type="text" @click="handleModifyStatus(scope.row,scope.$index)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination v-show="this.listQuery.total>0" background style="margin: 20px 0 0 0" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-size="listQuery.limit" layout="prev, pager, next, jumper" :total="listQuery.total"></el-pagination>
+    <div v-show="!listLoading" class="pagination-container">
+      <el-row>
+        <el-col :span="7">
+          <el-button type="primary" plain size="small">添加</el-button>
+        </el-col>
+        <el-col :span="17">
+          <el-pagination v-show="this.listQuery.total>0" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-size.sync="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="listQuery.total"></el-pagination>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -33,7 +45,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 15,
+        limit: 10,
         total: 0,
         companyName: '',
         contactName: '',
@@ -90,7 +102,7 @@ export default {
       this.fetchData()
     },
     handleSizeChange(val) {
-      this.listQuery.page = val
+      this.listQuery.limit = val
       this.fetchData()
     },
     handleCurrentChange(val) {
