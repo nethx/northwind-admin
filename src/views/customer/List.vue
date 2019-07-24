@@ -1,12 +1,37 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      npm r
-      <el-input placeholder="企业名称" v-model.trim="listQuery.companyName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input placeholder="联系人" v-model.trim="listQuery.contactName" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input placeholder="电话" v-model.trim="listQuery.phone" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+    <el-form v-if="isProSearch" :model="listQuery" ref="listQuery" label-width="80px" class="filter-container">
+      <el-col :span="8">
+        <el-form-item label="企业名称">
+          <el-input placeholder="请输入企业名称" clearable size="small" v-model.trim="listQuery.companyName" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
+        <el-form-item label="联系人">
+          <el-input placeholder="请输入联系人" clearable size="small" v-model.trim="listQuery.contactName" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
+        <el-form-item label="电话">
+          <el-input placeholder="请输入电话" clearable size="small" v-model.trim="listQuery.phone" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="24" class="filter-item">
+        <el-form-item>
+          <el-button size="small" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+          <el-button size="small" type="warning" plain @click="resetSearch">清空</el-button>
+          <el-button size="small" type="primary" plain @click="changeSearch">简单搜索</el-button>
+        </el-form-item>
+      </el-col>
+    </el-form>
+    <div v-else class="filter-container">
+      <el-input placeholder="企业名称" size="small" clearable v-model.trim="listQuery.companyName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input placeholder="联系人" size="small" clearable v-model.trim="listQuery.contactName" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input placeholder="电话" size="small"clearable v-model.trim="listQuery.phone" style="width: 120px" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-button class="filter-item" size="small" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button class="filter-item" size="small" type="primary" plain @click="changeSearch">高级搜索</el-button>
     </div>
+
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column prop="CustomerID" label="编号" align="center" width="70" fixed></el-table-column>
       <el-table-column prop="CompanyName" label="企业名称" width="260"></el-table-column>
@@ -43,6 +68,7 @@ export default {
   name: 'listCustomer',
   data() {
     return {
+      isProSearch: false,
       listQuery: {
         page: 1,
         limit: 10,
@@ -59,6 +85,20 @@ export default {
     this.fetchData()
   },
   methods: {
+    resetSearch() {
+      this.listQuery = {
+        page: this.listQuery.page,
+        limit: this.listQuery.limit,
+        total: this.listQuery.total,
+        companyName: '',
+        contactName: '',
+        phone: ''
+      }
+    },
+    changeSearch() {
+      // this.resetSearch()
+      this.isProSearch = !this.isProSearch
+    },
     handleUpdate(row) {
       this.$router.push({
         name: 'editCustomer',

@@ -1,17 +1,17 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input placeholder="产品名称" v-model.trim="listQuery.productName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-select v-model="listQuery.categoryID" placeholder="请选择类别" clearable class="filter-item" @change="handleFilter">
+      <el-input placeholder="产品名称" size="small" v-model.trim="listQuery.productName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-select v-model="listQuery.categoryID" size="small" placeholder="请选择类别" clearable class="filter-item" @change="handleFilter">
         <el-option v-for="item in categoryDropList" :key="item.Key" :label="item.Value" :value="item.Key"/>
       </el-select>
-      <el-select v-model="listQuery.supplierID" placeholder="请选择供应商" clearable style="width: 300px" class="filter-item" @change="handleFilter">
+      <el-select v-model="listQuery.supplierID" size="small" placeholder="请选择供应商" clearable style="width: 300px" class="filter-item" @change="handleFilter">
         <el-option v-for="item in supplierDropList" :key="item.Key" :label="item.Value" :value="item.Key"/>
       </el-select>
-      <el-select v-model="listQuery.discontinued" placeholder="请选择状态" clearable class="filter-item" @change="handleFilter">
+      <el-select v-model="listQuery.discontinued" size="small" placeholder="请选择状态" clearable class="filter-item" @change="handleFilter">
         <el-option v-for="item in productstatusOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
       </el-select>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button class="filter-item" size="small" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
     </div>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column prop="ProductID" label="编号" align="center" width="70" fixed/>

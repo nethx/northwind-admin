@@ -236,13 +236,13 @@ router.beforeEach((to, from, next) => {
     if (!store.state.user.info) {
       store.dispatch('getUser')
     }
-    if (to.name == 'Login') {
+    if (to.name === 'Login') {
       next('/home')
     } else {
       next()
     }
   } else {
-    if (to.name == 'Login') {
+    if (to.name === 'Login') {
       next()
     } else {
       next('/login')

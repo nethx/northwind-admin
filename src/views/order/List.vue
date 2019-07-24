@@ -1,15 +1,15 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input placeholder="客户名称" v-model.trim="listQuery.customerName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-input placeholder="货主姓名" v-model.trim="listQuery.shipName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-select v-model="listQuery.shipperID" placeholder="请选择物流公司" clearable class="filter-item" @change="handleFilter">
+      <el-input placeholder="客户名称" size="small" v-model.trim="listQuery.customerName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-input placeholder="货主姓名" size="small" v-model.trim="listQuery.shipName" style="width: 200px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-select v-model="listQuery.shipperID" size="small" placeholder="请选择物流公司" clearable class="filter-item" @change="handleFilter">
         <el-option v-for="item in shipperOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
       </el-select>
       <div class="filter-item">
-        <el-date-picker v-model="listQuery.orderDate" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="订购开始日期" end-placeholder="订购结束日期" :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" :default-time="['00:00:00', '23:59:59']"></el-date-picker>
+        <el-date-picker size="small" v-model="listQuery.orderDate" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="订购开始日期" end-placeholder="订购结束日期" :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" :default-time="['00:00:00', '23:59:59']"></el-date-picker>
       </div>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button size="small" class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
       <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>
     </div>
     <el-table v-loading="loading" :data="list" style="width: 100%" max-height="700" border highlight-current-row :row-key="row => row.OrderID">

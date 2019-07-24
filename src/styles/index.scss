@@ -192,8 +192,11 @@ code {
   padding-bottom: 10px;
   .filter-item {
     display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 10px;
+    vertical-align: top;
+    margin-bottom: 6px;
+  }
+  .el-form-item {
+    margin-bottom: 0px;
   }
 }
 
