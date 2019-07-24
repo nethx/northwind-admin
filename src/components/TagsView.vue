@@ -3,7 +3,7 @@
     <router-link class="tabs-view" v-for="tag in visitedViews" :to="{path: tag.path, query: {fromTabsView: true}}" :key="tag.path">
       <!-- {{tag.title }}
       <span class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />-->
-      <el-tag :closable="true" :type="isActive(tag.path)?'success':''" @close="closeSelectedTag(tag,$event)">{{tag.title}}</el-tag>
+      <el-tag :closable="true" :type="isActive(tag)?'success':''" @close="closeSelectedTag(tag,$event)">{{tag.title}}</el-tag>
     </router-link>
 
     <!-- <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
@@ -17,13 +17,13 @@
 
  <script>
 export default {
-  data() {
-    return {
-      // top: 0,
-      // left: 0
-      // selectedTag: {}
-    }
-  },
+  // data() {
+  //   return {
+  //     top: 0,
+  //     left: 0,
+  //     selectedTag: {}
+  //   }
+  // },
   computed: {
     visitedViews() {
       return this.$store.state.tagsView.visitedViews
@@ -46,8 +46,8 @@ export default {
     this.addViewTags()
   },
   methods: {
-    isActive(path) {
-      return path === this.$route.path
+    isActive(route) {
+      return route.path === this.$route.path
     },
     addViewTags() {
       const { name } = this.$route
