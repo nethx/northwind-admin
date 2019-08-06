@@ -14,10 +14,12 @@
       <el-button type="primary" @click="onJump">回到底部</el-button>
       <el-button type="success" @click="onJump">回到顶部</el-button>
     </div>-->
+    <ul v-for="obj in objs" :key="obj">{{obj}}</ul>
+    <el-button @click="addObj">添加obj</el-button>
     <div class="block">
       <el-carousel trigger="click" arrow="always">
         <el-carousel-item v-for="item in imgs" :key="item">
-          <img :src="item">
+          <img :src="item" />
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -102,6 +104,7 @@ export default {
   },
   data() {
     return {
+      objs: { a: 'obj.a' },
       msg: '高德地图展示',
       imgs: [require('../../static/IMG_20181001_103524735.jpg'), require('../../static/IMG_20181001_110127177.jpg'), require('../../static/IMG_20181001_110158570.jpg')],
       mapData: {
@@ -128,6 +131,11 @@ export default {
   },
 
   methods: {
+    addObj() {
+      this.objs.b = 'obj.b'
+      this.$set(this.objs)
+      console.log('objs:' + JSON.stringify(this.objs))
+    },
     queryData() {
       //查询操作
       this.listData = [
