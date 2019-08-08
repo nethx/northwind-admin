@@ -219,6 +219,24 @@ const routerMap = [
         }
       }
     ]
+  },
+  {
+    path: 'chat',
+    component: Layout,
+    redirect: '/myChat',
+    name: 'Chat',
+    children: [
+      {
+        path: '/myChat',
+        component: resolve => require(['views/myChat'], resolve),
+        name: 'myChat',
+        meta: {
+          title: '聊天室',
+          icon: 'el-icon-chat-round',
+          noCache: true
+        }
+      }
+    ]
   }
 ]
 const router = new Router({
