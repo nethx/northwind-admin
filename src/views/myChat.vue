@@ -36,7 +36,9 @@ export default {
       chatText: '',
       sendText: '',
       isWebSocket: false,
-      websock: null
+      websock: null,
+      linkCount: 0,
+      logout: false
     }
   },
   created() {},
@@ -60,12 +62,21 @@ export default {
       //连接建立之后执行send方法发送数据
       // let actions = { test: '12345' }
       // this.websocketsend(JSON.stringify(actions))
+      this.isWebSocket = true
+      this.logout = false
       this.websock.send('login:' + this.userName)
       // this.websock.send(this.sendText)
     },
     websocketonerror() {
-      // 连接建立失败重连
-      this.initWebSocket()
+      this.linkCount++
+      if (this.websock.readyState === 3 && this.linkCount < 2) {
+        this.$message({
+          message: '连接服务失败',
+          type: 'error'
+        })
+        // 连接建立失败重连
+        this.initWebSocket()
+      }
     },
     websocketonmessage(e) {
       // 数据接收
@@ -77,7 +88,9 @@ export default {
     //   this.websock.send(Data)
     // },
     websocketclose(e) {
-      this.chatText = this.chatText + '【' + this.userName + '】离开了聊天室！' + '<br />'
+      if (this.logout) {
+        this.chatText = this.chatText + '【' + this.userName + '】离开了聊天室！' + '<br />'
+      }
       //关闭
     },
     onSendText() {
@@ -97,10 +110,10 @@ export default {
     onLink() {
       if (this.isWebSocket && (this.websock.readyState === 0 || this.websock.readyState === 1)) {
         this.isWebSocket = false
+        this.logout = true
         this.websock.close()
       } else {
         if (this.userName) {
-          this.isWebSocket = true
           this.initWebSocket()
         } else {
           this.$message({
